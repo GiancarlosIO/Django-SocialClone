@@ -1,0 +1,70 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- META TAGS -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  {% block metas %}{% endblock %}
+
+  <!-- STYLES -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/css/medium-editor.min.css" type="text/css" media="screen" charset="utf-8">
+  <link rel="stylesheet" href="{% static 'socialclone/css/styles.css' %}">
+  {% block styles %}{% endblock %}
+
+  <!-- FONTS -->
+  <link href="https://fonts.googleapis.com/css?family=Montserrat|Russo+One" rel="stylesheet">
+  {% block fonts %}{% endblock %}
+
+  <title>{% block title %}{% endblock %} | Social Clone</title>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-between tech-fonts custom-navbar">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand big-brand" href="{% url 'home' %}">
+      Social Clone
+    </a>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav">
+        {% if user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'posts:create' %}">Post</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'groups:all' %}">Groups</a>
+          </li>
+          <li>
+            <a href="{% url 'groups:create' %}" class="nav-link">Create Group</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'accounts:logout' %}">Logout</a>
+          </li>
+        {% else %}
+          <li class="nav-item">
+            <a href="{% url 'groups:all' %}" class="nav-link">Groups</a>
+          </li>
+          <li class="nav-item">
+            <a href="{% url 'accounts:login' %}" class="nav-link">Login</a>
+          </li>
+          <li class="nav-item">
+            <a href="{% url 'accounts:signup' %}" class="nav-link">Sign up</a>
+          </li>
+        {% endif %}
+      </ul>
+    </div>
+  </nav>
+  <div class="container content">
+    {% block content %}{% endblock %}
+  </div>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/js/medium-editor.min.js"></script>
+  <script src="https://use.fontawesome.com/0e2fba2425.js"></script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>
